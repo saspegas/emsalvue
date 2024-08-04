@@ -4,7 +4,7 @@
         
         <!-- delivered messages -->
         <div ref="messagesContainer" class="flex-1 overflow-y-auto p-4 border-b border-gray-300">
-            <Message v-for="(message, index) in messages" :key="index" :message="message" />
+            <Message v-for="(message, index) in messages.slice().reverse()" :key="index" :message="message" />
         </div>
 
         <!-- new message card -->
