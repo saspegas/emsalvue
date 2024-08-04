@@ -29,22 +29,21 @@
 
 <script>
 import Message from './Message.vue'
+import axios from '../axios'
 
 export default {
     components: {
         Message,
     },
-    props: {
-        messages: {
-            type: Array,
-            default: () => [],
-        },
-    },
     data() {
         return {
+            messages: [],
             newMessage: '',
             minNewMessageLenght: 10,
         }
+    },
+    created() {
+        this.getMessages();
     },
     mounted() {
         this.scrollToBottom();
@@ -54,11 +53,29 @@ export default {
     },
     methods: {
         sendMessage() {
-            // sen message logic
+            axios.post('/api/messages', {
+                content: this.newMessage,
+            })
+                .then(response => {
+                    this.newMessage = '';
+                    this.getMessages();
+                })
+                .catch(error => {
+                    console.error(error);
+                });
         },
         scrollToBottom() {
             const container = this.$refs.messagesContainer;
             container.scrollTop = container.scrollHeight;
+        },
+        getMessages() {
+            axios.get('/api/messages')
+                .then(response => {
+                    this.messages = response.data.data;
+                })
+                .catch(error => {
+                    console.error(error);
+                });
         }
     }
 }

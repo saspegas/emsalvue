@@ -1,11 +1,10 @@
 <template>
     <div>
-        <Chat :messages="messages"></Chat>
+        <Chat></Chat>
     </div>
 </template>
 
 <script>
-import axios from '../axios'
 import Chat from './Chat.vue'
 
 export default {
@@ -18,9 +17,7 @@ export default {
         }
     },
     async mounted() {
-        console.log('Dashboard component mounted.')
-        const res = await axios.get('/api/messages');
-        this.messages = res.data.data
+        //
     }
 }
 </script>
