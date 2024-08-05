@@ -3,8 +3,11 @@
     <div class="chat-card border border-gray-300 rounded-lg w-full max-w-lg mx-auto flex flex-col h-500px mt-2 sm:mt-4 md:mt-6 lg:mt-8">
         
         <!-- delivered messages -->
-        <div ref="messagesContainer" class="flex-1 overflow-y-auto p-4 border-b border-gray-300">
+        <div v-if="messages.length > 0" ref="messagesContainer" class="flex-1 overflow-y-auto p-4 border-b border-gray-300">
             <Message v-for="(message, index) in messages.slice().reverse()" :key="index" :message="message" />
+        </div>
+        <div v-else ref="messagesContainer" class="flex-1 p-4 border-b border-gray-300 text-center text-gray-500 dark:text-gray-400">
+            No messages yet
         </div>
 
         <!-- new message card -->

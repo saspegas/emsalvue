@@ -16,9 +16,6 @@ export default {
             messages: [],
         }
     },
-    async mounted() {
-        //
-    }
 }
 </script>
 
